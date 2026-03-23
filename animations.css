@@ -1,0 +1,259 @@
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  60% {
+    transform: scale(1.08);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+}
+
+@keyframes tabEnter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero__title-line--1 {
+  animation: fadeInUp 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 100ms;
+}
+
+.hero__title-line--2 {
+  animation: fadeInUp 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 220ms;
+}
+
+.hero__subtitle {
+  animation: fadeInUp 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 340ms;
+}
+
+.upload-zone {
+  animation: fadeInUp 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 460ms;
+}
+
+.controls-panel.visible {
+  animation: scaleIn 400ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.files-panel.visible {
+  animation: fadeIn 400ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.file-card {
+  animation: slideInRight 350ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.file-card:nth-child(1) {
+  animation-delay: 0ms;
+}
+
+.file-card:nth-child(2) {
+  animation-delay: 50ms;
+}
+
+.file-card:nth-child(3) {
+  animation-delay: 100ms;
+}
+
+.file-card:nth-child(4) {
+  animation-delay: 150ms;
+}
+
+.file-card:nth-child(5) {
+  animation-delay: 200ms;
+}
+
+.file-card:nth-child(6) {
+  animation-delay: 250ms;
+}
+
+.file-card:nth-child(7) {
+  animation-delay: 300ms;
+}
+
+.file-card:nth-child(8) {
+  animation-delay: 350ms;
+}
+
+.file-card:nth-child(9) {
+  animation-delay: 400ms;
+}
+
+.file-card:nth-child(10) {
+  animation-delay: 450ms;
+}
+
+.file-card.removing {
+  transition: all 350ms cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  transform: translateX(40px) scale(0.95);
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-bottom: -12px;
+  overflow: hidden;
+}
+
+.btn--convert.converting {
+  pointer-events: none;
+}
+
+.btn--convert.converting .btn__text::after {
+  content: "";
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.toast {
+  animation: slideInRight 350ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.toast__icon {
+  animation: popIn 400ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 150ms;
+}
+
+.files-panel__counter {
+  animation: popIn 300ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.upload-zone.drag-over .upload-zone__drag-content svg {
+  animation: breathe 1.2s ease infinite;
+}
+
+.file-card__status--done {
+  animation: fadeIn 300ms ease both;
+}
+
+.tab-content--active {
+  animation: tabEnter 350ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.tool-card {
+  animation: fadeInUp 400ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.tool-card:nth-child(1) {
+  animation-delay: 50ms;
+}
+
+.tool-card:nth-child(2) {
+  animation-delay: 100ms;
+}
+
+.tool-card:nth-child(3) {
+  animation-delay: 150ms;
+}
+
+.tool-card:nth-child(4) {
+  animation-delay: 200ms;
+}
+
+.tool-card:nth-child(5) {
+  animation-delay: 250ms;
+}
+
+.tool-card:nth-child(6) {
+  animation-delay: 300ms;
+}
+
+.tool-card:nth-child(7) {
+  animation-delay: 350ms;
+}
+
+.settings-card {
+  animation: fadeInUp 400ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.settings-card:nth-child(1) {
+  animation-delay: 50ms;
+}
+
+.settings-card:nth-child(2) {
+  animation-delay: 130ms;
+}
+
+.settings-card:nth-child(3) {
+  animation-delay: 210ms;
+}
+
+.settings-card:nth-child(4) {
+  animation-delay: 290ms;
+}
+
+.format-rec {
+  animation: fadeInUp 300ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}

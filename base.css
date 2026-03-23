@@ -1,0 +1,153 @@
+:root {
+  --bg-primary: #f5f2ee;
+  --bg-secondary: #ebe7e1;
+  --bg-card: rgba(255, 255, 255, 0.72);
+  --bg-card-hover: rgba(255, 255, 255, 0.88);
+  --bg-input: rgba(255, 255, 255, 0.6);
+  --bg-input-focus: rgba(255, 255, 255, 0.9);
+  --text-primary: #1a1714;
+  --text-secondary: #6b635a;
+  --text-tertiary: #9e958b;
+  --accent: #c45d3e;
+  --accent-hover: #a94d32;
+  --accent-subtle: rgba(196, 93, 62, 0.08);
+  --accent-glow: rgba(196, 93, 62, 0.25);
+  --border: rgba(26, 23, 20, 0.08);
+  --border-strong: rgba(26, 23, 20, 0.15);
+  --success: #3a8a5c;
+  --success-bg: rgba(58, 138, 92, 0.08);
+  --error: #c44040;
+  --error-bg: rgba(196, 64, 64, 0.08);
+  --warning: #b8860b;
+  --warning-bg: rgba(184, 134, 11, 0.08);
+  --shadow-sm: 0 1px 3px rgba(26, 23, 20, 0.04);
+  --shadow-md: 0 4px 20px rgba(26, 23, 20, 0.06);
+  --shadow-lg: 0 12px 40px rgba(26, 23, 20, 0.1);
+  --shadow-glow: 0 0 60px var(--accent-glow);
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --font-display: 'Instrument Serif', Georgia, serif;
+  --font-body: 'DM Sans', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  --glow-1: radial-gradient(ellipse 600px 400px at 20% 10%, rgba(196, 93, 62, 0.06), transparent);
+  --glow-2: radial-gradient(ellipse 500px 500px at 80% 60%, rgba(142, 100, 70, 0.05), transparent);
+  --navbar-height: 60px;
+}
+
+[data-theme="dark"] {
+  --bg-primary: #131210;
+  --bg-secondary: #1c1a17;
+  --bg-card: rgba(35, 32, 28, 0.72);
+  --bg-card-hover: rgba(45, 41, 36, 0.85);
+  --bg-input: rgba(255, 255, 255, 0.05);
+  --bg-input-focus: rgba(255, 255, 255, 0.1);
+  --text-primary: #ede8e1;
+  --text-secondary: #9e958b;
+  --text-tertiary: #6b635a;
+  --accent: #e07050;
+  --accent-hover: #f08060;
+  --accent-subtle: rgba(224, 112, 80, 0.1);
+  --accent-glow: rgba(224, 112, 80, 0.2);
+  --border: rgba(237, 232, 225, 0.06);
+  --border-strong: rgba(237, 232, 225, 0.12);
+  --success: #5cb87a;
+  --success-bg: rgba(92, 184, 122, 0.1);
+  --error: #e06060;
+  --error-bg: rgba(224, 96, 96, 0.1);
+  --warning-bg: rgba(184, 134, 11, 0.12);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.25);
+  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.35);
+  --glow-1: radial-gradient(ellipse 600px 400px at 20% 10%, rgba(224, 112, 80, 0.04), transparent);
+  --glow-2: radial-gradient(ellipse 500px 500px at 80% 60%, rgba(142, 100, 70, 0.03), transparent);
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: background var(--transition-slow), color var(--transition-slow);
+}
+
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.3;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.5'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px;
+}
+
+.ambient-glow {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ambient-glow--1 {
+  background: var(--glow-1);
+}
+
+.ambient-glow--2 {
+  background: var(--glow-2);
+}
+
+.global-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 200;
+  opacity: 0;
+  transition: opacity var(--transition-base);
+  pointer-events: none;
+}
+
+.global-progress.active {
+  opacity: 1;
+}
+
+.global-progress__bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-hover), var(--accent));
+  background-size: 200% 100%;
+  border-radius: 0 2px 2px 0;
+  width: 0%;
+  transition: width 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  animation: shimmerBar 1.5s ease infinite;
+}
+
+@keyframes shimmerBar {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+

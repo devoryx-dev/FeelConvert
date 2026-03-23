@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FeelConvert — Premium Image Converter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="base.css">
+    <link rel="stylesheet" href="layout.css">
+    <link rel="stylesheet" href="components.css">
+    <link rel="stylesheet" href="animations.css">
+</head>
+<body>
+    <div class="grain-overlay"></div>
+    <div class="ambient-glow ambient-glow--1"></div>
+    <div class="ambient-glow ambient-glow--2"></div>
+    <div class="global-progress" id="globalProgress"><div class="global-progress__bar" id="globalProgressBar"></div></div>
+
+    <nav class="navbar">
+        <div class="navbar__brand">
+            <span class="navbar__logo">◈</span>
+            <span class="navbar__name">FeelConvert</span>
+        </div>
+        <div class="navbar__tabs" id="navTabs">
+            <button class="navbar__tab navbar__tab--active" data-tab="convert">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>
+                <span>Convert</span>
+            </button>
+            <button class="navbar__tab" data-tab="tools">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+                <span>Tools</span>
+            </button>
+            <button class="navbar__tab" data-tab="settings">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v2m0 18v2m-9-11h2m18 0h2m-3.64-6.36l-1.42 1.42M6.34 17.66l-1.42 1.42m0-12.72l1.42 1.42m11.32 11.32l1.42 1.42"/></svg>
+                <span>Settings</span>
+            </button>
+            <div class="navbar__tab-indicator" id="tabIndicator"></div>
+        </div>
+        <div class="navbar__right">
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                <span class="theme-toggle__icon theme-toggle__icon--light">☀</span>
+                <span class="theme-toggle__icon theme-toggle__icon--dark">☾</span>
+                <span class="theme-toggle__slider"></span>
+            </button>
+            <button class="navbar__mobile-toggle" id="mobileMenuToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+        </div>
+    </nav>
+
+    <div class="mobile-nav" id="mobileNav">
+        <button class="mobile-nav__item mobile-nav__item--active" data-tab="convert">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>
+            <span>Convert</span>
+        </button>
+        <button class="mobile-nav__item" data-tab="tools">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+            <span>Tools</span>
+        </button>
+        <button class="mobile-nav__item" data-tab="settings">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v2m0 18v2m-9-11h2m18 0h2m-3.64-6.36l-1.42 1.42M6.34 17.66l-1.42 1.42m0-12.72l1.42 1.42m11.32 11.32l1.42 1.42"/></svg>
+            <span>Settings</span>
+        </button>
+    </div>
+
+    <main class="app">
+        <div class="tab-content tab-content--active" id="tabConvert">
+            <section class="hero">
+                <h1 class="hero__title">
+                    <span class="hero__title-line hero__title-line--1">Convert images</span>
+                    <span class="hero__title-line hero__title-line--2">with <em>elegance</em></span>
+                </h1>
+                <p class="hero__subtitle">Drag, drop, convert. Supports JPG, PNG, WEBP, GIF, BMP, TIFF, SVG, ICO.<br>Everything stays in your browser — nothing leaves your device.</p>
+            </section>
+
+            <section class="workspace" id="workspace">
+                <div class="upload-zone" id="uploadZone">
+                    <div class="upload-zone__inner">
+                        <div class="upload-zone__icon"><svg width="48" height="48" viewBox="0 0 48 48" fill="none"><path d="M24 32V16M24 16L18 22M24 16L30 22" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 32V36C8 38.2091 9.79086 40 12 40H36C38.2091 40 40 38.2091 40 36V32" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                        <h3 class="upload-zone__title">Drop images here</h3>
+                        <p class="upload-zone__text">or <button class="upload-zone__browse" id="browseBtn">browse files</button></p>
+                        <p class="upload-zone__formats">JPG · PNG · WEBP · GIF · BMP · TIFF · SVG · ICO</p>
+                    </div>
+                    <div class="upload-zone__drag-overlay" id="dragOverlay">
+                        <div class="upload-zone__drag-content">
+                            <svg width="56" height="56" viewBox="0 0 48 48" fill="none"><path d="M24 32V16M24 16L18 22M24 16L30 22" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 32V36C8 38.2091 9.79086 40 12 40H36C38.2091 40 40 38.2091 40 36V32" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <span class="upload-zone__drag-text">Release to upload</span>
+                            <span class="upload-zone__drag-count" id="dragCount"></span>
+                        </div>
+                    </div>
+                    <input type="file" id="fileInput" multiple accept="image/*,.svg,.ico,.bmp,.tiff,.tif,.webp" hidden>
+                </div>
+
+                <div class="controls-panel" id="controlsPanel">
+                    <div class="controls-panel__header">
+                        <h2 class="controls-panel__title">Conversion Settings</h2>
+                        <div class="controls-panel__header-right">
+                            <span class="controls-panel__saved" id="settingsSaved"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Settings saved</span>
+                            <span class="controls-panel__count" id="fileCount">0 files</span>
+                        </div>
+                    </div>
+                    <div class="format-rec" id="formatRec" style="display:none">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                        <span id="formatRecText"></span>
+                        <button class="format-rec__apply" id="formatRecApply">Apply</button>
+                        <button class="format-rec__dismiss" id="formatRecDismiss">×</button>
+                    </div>
+                    <div class="controls-grid">
+                        <div class="control-group">
+                            <label class="control-label">Output Format</label>
+                            <div class="format-selector" id="formatSelector">
+                                <button class="format-btn format-btn--active" data-format="png">PNG</button>
+                                <button class="format-btn" data-format="jpeg">JPG</button>
+                                <button class="format-btn" data-format="webp">WEBP</button>
+                                <button class="format-btn" data-format="gif">GIF</button>
+                                <button class="format-btn" data-format="bmp">BMP</button>
+                                <button class="format-btn" data-format="ico">ICO</button>
+                            </div>
+                        </div>
+                        <div class="control-group" id="qualityGroup">
+                            <label class="control-label">Quality <span class="control-value" id="qualityValue">92%</span></label>
+                            <div class="range-slider-wrap"><div class="range-slider-fill" id="qualityFill"></div><input type="range" class="range-slider" id="qualitySlider" min="1" max="100" value="92"></div>
+                            <div class="range-labels"><span>Smaller file</span><span>Higher quality</span></div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Resize</label>
+                            <div class="resize-controls">
+                                <div class="resize-input-group"><input type="number" class="resize-input" id="resizeWidth" placeholder="Width" min="1" max="10000"><span class="resize-unit">px</span></div>
+                                <button class="aspect-lock" id="aspectLock" title="Lock aspect ratio"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></button>
+                                <div class="resize-input-group"><input type="number" class="resize-input" id="resizeHeight" placeholder="Height" min="1" max="10000"><span class="resize-unit">px</span></div>
+                            </div>
+                        </div>
+                        <div class="control-group" id="transparencyGroup">
+                            <label class="control-label toggle-label"><span>Preserve Transparency</span><button class="toggle-switch active" id="transparencyToggle"><span class="toggle-switch__knob"></span></button></label>
+                        </div>
+                    </div>
+                    <div class="controls-panel__actions">
+                        <button class="btn btn--primary btn--convert" id="convertBtn" disabled><span class="btn__text">Convert All</span><span class="btn__icon">→</span></button>
+                        <button class="btn btn--accent-ghost btn--smart" id="smartCompressBtn" disabled title="Find optimal quality automatically"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> Smart</button>
+                        <button class="btn btn--ghost btn--clear" id="clearBtn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg><span>Clear</span></button>
+                    </div>
+                </div>
+
+                <div class="files-panel" id="filesPanel">
+                    <div class="files-panel__header">
+                        <div class="files-panel__header-left"><h2 class="files-panel__title">Files</h2><span class="files-panel__counter" id="filesPanelCounter">0</span></div>
+                        <button class="btn btn--small btn--download-all" id="downloadAllBtn" style="display:none"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span>Download All (.zip)</span></button>
+                    </div>
+                    <div class="files-list" id="filesList"></div>
+                </div>
+            </section>
+        </div>
+
+        <div class="tab-content" id="tabTools">
+            <section class="tools-section">
+                <div class="section-header">
+                    <h2 class="section-header__title">Image Tools</h2>
+                    <p class="section-header__desc">Quick transformations — no conversion needed.</p>
+                </div>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-card__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6"/><path d="M21.34 13a10 10 0 11-2.26-7.34L21.5 8"/></svg></div>
+                        <h3 class="tool-card__title">Rotate</h3>
+                        <p class="tool-card__desc">Rotate images 90°, 180°, or 270°</p>
+                        <div class="tool-card__actions"><button class="tool-action-btn" data-rotate="90">90°</button><button class="tool-action-btn" data-rotate="180">180°</button><button class="tool-action-btn" data-rotate="270">270°</button></div>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-card__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><polyline points="8 8 4 12 8 16"/><polyline points="16 8 20 12 16 16"/></svg></div>
+                        <h3 class="tool-card__title">Flip</h3>
+                        <p class="tool-card__desc">Mirror images horizontally or vertically</p>
+                        <div class="tool-card__actions"><button class="tool-action-btn" data-flip="horizontal">Horizontal</button><button class="tool-action-btn" data-flip="vertical">Vertical</button></div>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-card__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 000 20z"/></svg></div>
+                        <h3 class="tool-card__title">Grayscale</h3>
+                        <p class="tool-card__desc">Convert images to black & white</p>
+                        <div class="tool-card__actions"><button class="tool-action-btn" data-filter="grayscale">Apply</button></div>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-card__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg></div>
+                        <h3 class="tool-card__title">Brightness</h3>
+                        <p class="tool-card__desc">Adjust brightness level</p>
+                        <div class="tool-card__actions tool-card__actions--slider"><input type="range" class="range-slider tool-range" id="brightnessSlider" min="50" max="200" value="100"><span class="tool-range-val" id="brightnessVal">100%</span><button class="tool-action-btn" data-filter="brightness">Apply</button></div>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-card__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
+                        <h3 class="tool-card__title">Contrast</h3>
+                        <p class="tool-card__desc">Adjust contrast level</p>
+                        <div class="tool-card__actions tool-card__actions--slider"><input type="range" class="range-slider tool-range" id="contrastSlider" min="50" max="200" value="100"><span class="tool-range-val" id="contrastVal">100%</span><button class="tool-action-btn" data-filter="contrast">Apply</button></div>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-card__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z"/></svg></div>
+                        <h3 class="tool-card__title">Saturation</h3>
+                        <p class="tool-card__desc">Adjust color saturation</p>
+                        <div class="tool-card__actions tool-card__actions--slider"><input type="range" class="range-slider tool-range" id="saturationSlider" min="0" max="300" value="100"><span class="tool-range-val" id="saturationVal">100%</span><button class="tool-action-btn" data-filter="saturate">Apply</button></div>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-card__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></div>
+                        <h3 class="tool-card__title">Pixelate</h3>
+                        <p class="tool-card__desc">Create pixel art effect</p>
+                        <div class="tool-card__actions tool-card__actions--slider"><input type="range" class="range-slider tool-range" id="pixelSlider" min="2" max="40" value="8"><span class="tool-range-val" id="pixelVal">8px</span><button class="tool-action-btn" data-filter="pixelate">Apply</button></div>
+                    </div>
+                </div>
+                <div class="tools-upload-hint" id="toolsHint"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg><span>Upload images in the <button class="tools-hint-link" data-tab="convert">Convert</button> tab first, then come back to apply tools.</span></div>
+                <div class="tools-upload-hint tools-ready" id="toolsReady" style="display:none"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span id="toolsReadyCount">0 files</span> loaded — pick a tool above to apply.</div>
+            </section>
+        </div>
+
+        <div class="tab-content" id="tabSettings">
+            <section class="settings-section">
+                <div class="section-header"><h2 class="section-header__title">Settings</h2><p class="section-header__desc">Customize FeelConvert to your preferences.</p></div>
+                <div class="settings-grid">
+                    <div class="settings-card">
+                        <div class="settings-card__header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/></svg><h3>Appearance</h3></div>
+                        <div class="settings-row"><span class="settings-row__label">Theme</span><div class="settings-theme-picker" id="settingsThemePicker"><button class="settings-theme-btn settings-theme-btn--active" data-set-theme="light"><span class="settings-theme-btn__dot settings-theme-btn__dot--light"></span> Light</button><button class="settings-theme-btn" data-set-theme="dark"><span class="settings-theme-btn__dot settings-theme-btn__dot--dark"></span> Dark</button><button class="settings-theme-btn" data-set-theme="auto"><span class="settings-theme-btn__dot settings-theme-btn__dot--auto"></span> Auto</button></div></div>
+                    </div>
+                    <div class="settings-card">
+                        <div class="settings-card__header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/></svg><h3>Default Conversion</h3></div>
+                        <div class="settings-row"><span class="settings-row__label">Default format</span><select class="settings-select" id="settingsDefaultFormat"><option value="png">PNG</option><option value="jpeg">JPG</option><option value="webp">WEBP</option><option value="gif">GIF</option><option value="bmp">BMP</option><option value="ico">ICO</option></select></div>
+                        <div class="settings-row"><span class="settings-row__label">Default quality</span><div class="settings-quality-row"><input type="range" class="range-slider settings-range" id="settingsDefaultQuality" min="1" max="100" value="92"><span class="settings-quality-val" id="settingsQualityVal">92%</span></div></div>
+                        <div class="settings-row"><span class="settings-row__label">File naming</span><select class="settings-select" id="settingsNaming"><option value="suffix">original-converted.ext</option><option value="prefix">converted-original.ext</option><option value="replace">original.ext (replace ext)</option></select></div>
+                    </div>
+                    <div class="settings-card">
+                        <div class="settings-card__header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="12 8 12 12 14 14"/><circle cx="12" cy="12" r="10"/></svg><h3>Recent Conversions</h3></div>
+                        <div class="history-list" id="historyList"><p class="history-empty">No conversions yet.</p></div>
+                        <button class="btn btn--ghost btn--small history-clear" id="clearHistoryBtn" style="display:none">Clear History</button>
+                    </div>
+                    <div class="settings-card">
+                        <div class="settings-card__header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg><h3>About</h3></div>
+                        <div class="settings-about"><p><strong>FeelConvert</strong> — Premium Image Converter</p><p>All processing happens locally in your browser. No files are ever uploaded to any server.</p><p class="settings-about__version">v3.0 · Built with vanilla JS</p></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer"><p>FeelConvert — All processing happens locally in your browser. Your images never leave your device.</p></footer>
+    <div class="toast-container" id="toastContainer"></div>
+
+    <div class="preview-modal" id="previewModal">
+        <div class="preview-modal__backdrop" id="previewBackdrop"></div>
+        <div class="preview-modal__content">
+            <button class="preview-modal__close" id="previewClose">×</button>
+            <div class="preview-modal__tabs" id="previewTabs">
+                <button class="preview-modal__tab preview-modal__tab--active" data-preview-tab="original">Original</button>
+                <button class="preview-modal__tab" data-preview-tab="compare">Compare</button>
+            </div>
+            <div class="preview-modal__view preview-modal__view--original" id="previewOriginalView">
+                <img class="preview-modal__image" id="previewImage" alt="Preview">
+            </div>
+            <div class="preview-modal__view preview-modal__view--compare" id="previewCompareView" style="display:none">
+                <div class="compare-slider" id="compareSlider">
+                    <img class="compare-slider__before" id="compareBefore" alt="Before">
+                    <div class="compare-slider__after-wrap" id="compareAfterWrap">
+                        <img class="compare-slider__after" id="compareAfter" alt="After">
+                    </div>
+                    <div class="compare-slider__handle" id="compareHandle">
+                        <div class="compare-slider__line"></div>
+                        <div class="compare-slider__knob"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></div>
+                    </div>
+                    <span class="compare-slider__label compare-slider__label--before">Before</span>
+                    <span class="compare-slider__label compare-slider__label--after">After</span>
+                </div>
+            </div>
+            <div class="preview-modal__info" id="previewInfo"></div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="converter.js"></script>
+    <script src="ui.js"></script>
+    <script src="state.js"></script>
+    <script src="core.js"></script>
+    <script src="handlers.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
